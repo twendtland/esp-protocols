@@ -412,6 +412,24 @@ esp_err_t mdns_service_port_set_for_host(const char *instance, const char *servi
 esp_err_t mdns_service_txt_set(const char *service_type, const char *proto, mdns_txt_item_t txt[], uint8_t num_items);
 
 /**
+ * @brief  Replace all TXT items for service
+ *
+ * @param  service_type service type (_http, _ftp, etc)
+ * @param  proto        service protocol (_tcp, _udp)
+ * @param  txt          array of TXT data (eg. {{"var","val"},{"other","2"}})
+ * @param  num_items    number of items in TXT data
+ * @param  timeout_ms   time in ms this call should block
+ *
+ * @return
+ *     - ESP_OK success
+ *     - ESP_ERR_INVALID_ARG Parameter error
+ *     - ESP_ERR_NOT_FOUND Service not found
+ *     - ESP_ERR_NO_MEM memory error
+ */
+esp_err_t mdns_service_txt_set_with_timeout(const char * service_type, const char * proto, mdns_txt_item_t txt[], uint8_t num_items, uint32_t timeout_ms);
+
+
+/**
  * @brief  Replace all TXT items for service with hostname
  *
  * @note The value length of txt items will be automatically decided by strlen
